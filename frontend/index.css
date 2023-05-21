@@ -4,3 +4,40 @@
     padding: 0;
     font-family: 'Roboto', sans-serif;
 }
+
+.senas-form {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.senas-form img {
+    display: block;
+    margin: 0 auto;
+    height: 400px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.senas-form input {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.senas-form input:focus {
+    outline: none;
+    border-color: #2ecc71;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px 0;
+}

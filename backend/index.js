@@ -1,6 +1,8 @@
 // Require express, cors, dotenv, and routes
 const fs = require("fs");
 const dotenv = require("dotenv");
+const tokenizer = require("wink-tokenizer");
+const myTokenizer = tokenizer();
 dotenv.config();
 const express = require("express");
 const app = express();
@@ -20,17 +22,22 @@ app.use(express.urlencoded({ extended: true }));
 
 // App routes
 app.get("/translate", async (req, res) => {
-    if(!req.query.text) {
-        return res.status(400).send("Missing text parameter");
+    if(!req.query.text) return res.status(400).send("Missing text parameter");
+    try {
+        const response = await openai.createChatCompletion({
+            model: "gpt-3.5-turbo",
+            messages: [{role: "user", content: lds_input}, {role: "assistant", content: "Entendido, a partir de ahora responderé en LSM. Por favor, proporciona la oración que deseas traducir."}, {role: "user", content: "\"" + req.query.text + "\""}],
+        });
+        res.status(response.status).send({
+            message: myTokenizer.tokenize(response.data.choices[0].message.content).filter(word => word.tag !== "punctuation" && word.tag !== "alien"),
+            status: response.status,
+        });
+    } catch (error) {
+        res.status(501).send({
+            message: "The server didn't respond or there are too many requests. Please try again later.",
+            status: 501
+        })
     }
-    const response = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
-        messages: [{role: "user", content: lds_input}, {role: "assistant", content: "Entendido, a partir de ahora responderé en LSM. Por favor, proporciona la oración que deseas traducir."}, {role: "user", content: "\"" + req.query.text + "\""}],
-    });
-    res.status(response.status).send({
-        message: response.data.choices[0].message,
-        status: response.status,
-    });
 });
 
 app.listen(5000, () => {

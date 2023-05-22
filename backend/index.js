@@ -27,7 +27,7 @@ app.get("/translate", async (req, res) => {
     try {
         const response = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
-            messages: [{role: "user", content: lds_input}, {role: "assistant", content: "Entendido, a partir de ahora responderé en LSM. Por favor, proporciona la oración que deseas traducir."}, {role: "user", content: "\"" + req.query.text + "\""}],
+            messages: [{role: "system", content: lds_input}, {role: "assistant", content: "Entendido, a partir de ahora responderé en LSM. Por favor, proporciona la oración que deseas traducir."}, {role: "user", content: "\"" + req.query.text + "\""}],
             temperature: 0.5
         
         });

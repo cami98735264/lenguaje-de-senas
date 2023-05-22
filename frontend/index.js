@@ -8,6 +8,7 @@ oldImg.alt = "Imagen de la palabra en LSM";
 cont.appendChild(oldImg);
 const h5 = document.createElement("h5");
 const wait = time => new Promise((resolve) => setTimeout(resolve, time));
+
 const onSubmit = async (event) => {
     event.preventDefault();
     const inputText = input.value;

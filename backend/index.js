@@ -3,6 +3,7 @@ const fs = require("fs");
 const dotenv = require("dotenv");
 const tokenizer = require("wink-tokenizer");
 const myTokenizer = tokenizer();
+myTokenizer.defineConfig( { quoted_phrase: true } );
 dotenv.config();
 const express = require("express");
 const app = express();
@@ -27,6 +28,8 @@ app.get("/translate", async (req, res) => {
         const response = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [{role: "user", content: lds_input}, {role: "assistant", content: "Entendido, a partir de ahora responderé en LSM. Por favor, proporciona la oración que deseas traducir."}, {role: "user", content: "\"" + req.query.text + "\""}],
+            temperature: 0.5
+        
         });
         res.status(response.status).send({
             message: myTokenizer.tokenize(response.data.choices[0].message.content).filter(word => word.tag !== "punctuation" && word.tag !== "alien"),

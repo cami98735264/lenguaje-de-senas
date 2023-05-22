@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -16,7 +18,23 @@
 }
 
 .senas-form img {
+    width: 100%;
     display: block;
+    margin: 0 auto;
+    height: 400px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+.senas-form #sign-image-container h5 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 35px;
+}
+.senas-form #sign-image-container {
+    width: 100%;
+    position: relative;
     margin: 0 auto;
     height: 400px;
     margin-bottom: 20px;

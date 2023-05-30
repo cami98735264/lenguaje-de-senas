@@ -35,12 +35,14 @@ app.get("/translate", async (req, res) => {
         if(!plainText.success) {
             res.status(501).send({
                 message: plainText.errorMessage ? plainText.errorMessage : "Translation couldn't be resolved",
-                status: 501
+                status: 501,
+                success: false
             })
         } else {
             res.status(response.status).send({
                 message: myTokenizer.tokenize(plainText.message).filter(word => word.tag !== "punctuation" && word.tag !== "alien"),
                 status: response.status,
+                success: true
             });
         }
     } catch (error) {

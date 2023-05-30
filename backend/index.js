@@ -27,14 +27,22 @@ app.get("/translate", async (req, res) => {
     try {
         const response = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
-            messages: [{role: "system", content: lds_input}, {role: "assistant", content: "Entendido, a partir de ahora responderé en LSM. Por favor, proporciona la oración que deseas traducir."}, {role: "user", content: "Sentence to translate: " + req.query.text }],
+            messages: [{role: "system", content: lds_input}, {role: "assistant", content: '{ "message": "Entendido, a partir de ahora responderé en LSM. Por favor, proporciona la oración que deseas traducir.", "success": true }'}, {role: "user", content: "Sentence to translate: " + req.query.text }],
             temperature: 0.5
         
         });
-        res.status(response.status).send({
-            message: myTokenizer.tokenize(response.data.choices[0].message.content).filter(word => word.tag !== "punctuation" && word.tag !== "alien"),
-            status: response.status,
-        });
+        const plainText = JSON.parse(response.data.choices[0].message.content);
+        if(!plainText.success) {
+            res.status(501).send({
+                message: plainText.errorMessage ? plainText.errorMessage : "Translation couldn't be resolved",
+                status: 501
+            })
+        } else {
+            res.status(response.status).send({
+                message: myTokenizer.tokenize(plainText.message).filter(word => word.tag !== "punctuation" && word.tag !== "alien"),
+                status: response.status,
+            });
+        }
     } catch (error) {
         console.log(error)
         res.status(501).send({

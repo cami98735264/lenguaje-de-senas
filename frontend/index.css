@@ -25,13 +25,7 @@
     border-radius: 5px;
     border: 1px solid #ddd;
 }
-.senas-form #sign-image-container h5 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 35px;
-}
+
 .senas-form #sign-image-container {
     width: 100%;
     position: relative;

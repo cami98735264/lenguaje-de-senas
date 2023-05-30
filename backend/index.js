@@ -27,7 +27,7 @@ app.get("/translate", async (req, res) => {
     try {
         const response = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
-            messages: [{role: "system", content: lds_input}, {role: "assistant", content: "Entendido, a partir de ahora responderé en LSM. Por favor, proporciona la oración que deseas traducir."}, {role: "user", content: "\"" + req.query.text + "\""}],
+            messages: [{role: "system", content: lds_input}, {role: "assistant", content: "Entendido, a partir de ahora responderé en LSM. Por favor, proporciona la oración que deseas traducir."}, {role: "user", content: "Sentence to translate: " + req.query.text }],
             temperature: 0.5
         
         });
@@ -36,6 +36,7 @@ app.get("/translate", async (req, res) => {
             status: response.status,
         });
     } catch (error) {
+        console.log(error)
         res.status(501).send({
             message: "The server didn't respond or there are too many requests. Please try again later.",
             status: 501

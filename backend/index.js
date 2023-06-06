@@ -1,5 +1,6 @@
 // Require express, cors, dotenv, and routes
 const fs = require("fs");
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const dotenv = require("dotenv");
 const tokenizer = require("wink-tokenizer");
 const myTokenizer = tokenizer();

@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.senas-form {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.senas-form img {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    height: 400px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.senas-form #sign-image-container {
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    height: 400px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.senas-form input {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.senas-form input:focus {
+    outline: none;
+    border-color: #2ecc71;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px 0;
+}

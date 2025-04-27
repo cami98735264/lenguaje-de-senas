@@ -521,6 +521,12 @@ LSE: Ellas ópera cantar.
 LOE: Nosotros miramos televisión.
 LSE: Nosotros televisión mirar.
 
+LOE: Me siento triste.
+LSE: Yo triste
+
+LOE: Me siento felíz.
+LSE: Yo felíz
+
 LOE: En esta ocasión nuestra institución, gradúa un total de 56 profesionales universitarios
 LSE: Esta ocasión institución nuestra, graduar total 56 profesionales universitarios
 

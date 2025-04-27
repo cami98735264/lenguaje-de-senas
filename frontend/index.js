@@ -4,6 +4,21 @@ const cont = document.getElementById("sign-image-container");
 const img = document.getElementById("main-img")
 const wait = time => new Promise((resolve) => setTimeout(resolve, time));
 
+
+function isGifAnimated (uint8) {
+    let duration = 0
+    for (let i = 0, len = uint8.length; i < len; i++) {
+      if (uint8[i] == 0x21
+        && uint8[i + 1] == 0xF9
+        && uint8[i + 2] == 0x04
+        && uint8[i + 7] == 0x00) 
+      {
+        const delay = (uint8[i + 5] << 8) | (uint8[i + 4] & 0xFF)
+        duration += delay < 2 ? 10 : delay
+      }
+    }
+    return duration / 100
+  }
 const onSubmit = async (event) => {
     event.preventDefault();
     const inputText = input.value;
@@ -15,7 +30,7 @@ const onSubmit = async (event) => {
         window.alert(request.message.map(word => word.value).join(" "));
         for(const word of request.message) {
             if(word.tag === "word") {
-                img.src = "./public/" + word.value + ".gif"
+                img.src = "./public/" + word.value + ".gif";
                 await wait(1000);
             }
             else if(word.tag === "quoted_phrase") {
